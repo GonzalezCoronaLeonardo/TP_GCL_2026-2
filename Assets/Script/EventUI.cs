@@ -44,24 +44,32 @@ public class EventUI : MonoBehaviour
 
     //Metodo para cambiar entre paneles
 
-    public void CycleObjects()
+    public void CycleObjects(int direction)
     {
         //Incrementa el indice y vuelve al inicio
-        currentIndex = (currentIndex + 1) % listaInstrucciones.Count;
+        currentIndex = (currentIndex + direction + listaInstrucciones.Count) % listaInstrucciones.Count;
 
         //Actualizar visibilidad
         UpdateVisibility();
     }
 
-    //Metodo para actualizar el metodo mostrado
+    //Metodo para actualizar el texto mostrado
 
-    private void UpdateText()
+    public void UpdateText()
     {
-        if(mensajesInstrucciones.Count > 0)
+        if (mensajesInstrucciones.Count > 0 && textMeshProUGUI != null)
         {
-            
+            textMeshProUGUI.text = mensajesInstrucciones[currentIndex];
         }
     }
+
+    public void CycleText(int direction)
+    {
+        currentIndex = (currentIndex + direction + mensajesInstrucciones.Count) %mensajesInstrucciones.Count;
+
+        UpdateText();
+    }
+
 
     //Metodo para cambiar de escena
 
@@ -75,6 +83,14 @@ public class EventUI : MonoBehaviour
     public void ChangeSceneByName(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
+    }
+
+    //Recargar escena actual
+
+    public void ReloadCurrentScene()
+    {
+        Scene currentScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(currentScene.buildIndex);
     }
 
 

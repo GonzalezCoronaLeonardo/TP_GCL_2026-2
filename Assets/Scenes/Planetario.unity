@@ -869,7 +869,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &428698120
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1123,12 +1123,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 748293695}
         m_TargetAssemblyTypeName: EventUI, Assembly-CSharp
-        m_MethodName: CycleObjects
-        m_Mode: 1
+        m_MethodName: CycleText
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: -1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1661,6 +1661,12 @@ MonoBehaviour:
   - {fileID: 428698119}
   - {fileID: 2113741386}
   currentIndex: 0
+  mensajesInstrucciones:
+  - '    Panel 1'
+  - '    Panel 2'
+  - '    Panel 3'
+  - '    Panel 4'
+  textMeshProUGUI: {fileID: 1289661835}
 --- !u!4 &748293696
 Transform:
   m_ObjectHideFlags: 0
@@ -2586,8 +2592,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 748293695}
         m_TargetAssemblyTypeName: EventUI, Assembly-CSharp
-        m_MethodName: ChangeSceneByName
-        m_Mode: 5
+        m_MethodName: ReloadCurrentScene
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3027,7 +3033,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1875969660
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8689,12 +8695,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 748293695}
         m_TargetAssemblyTypeName: EventUI, Assembly-CSharp
-        m_MethodName: CycleObjects
-        m_Mode: 1
+        m_MethodName: CycleText
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -8775,7 +8781,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2113741387
 MonoBehaviour:
   m_ObjectHideFlags: 0

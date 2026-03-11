@@ -18,7 +18,7 @@ public class Concurrencia : MonoBehaviour
     public Transform SincronoSphere;
     public Transform ThreadSphere;
     public Transform taskSphere;
-    public Transform CorutineSphere; 
+    public Transform CoroutineSphere; 
     public Transform mainCube;
 
     //Acciones a ejecutar en el hilo secuandario
@@ -30,7 +30,10 @@ public class Concurrencia : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        if(useSincrono) MoveSincrono();
+        if(useThread) MoveWithThread();
+        if(usetask) MoveWithTask();
+        if(useCorutine) StartCoroutine(MoveWithCoroutine());
     }
 
     // Update is called once per frame
@@ -60,13 +63,55 @@ public class Concurrencia : MonoBehaviour
         Thread.Sleep(50);
     }
 
+    //Movimiento con hilo secndario
+    void MoveWithThread()
+    {
+        new Thread(() =>
+        {
+            for(int i = 0; i <= 100; i ++)
+            {
+                Thread.Sleep(50);
+                lock (mainThreadActions)
+                {
+                    mainThreadActions.Enqueue(() =>
+                    {
+                        ThreadSphere.position += Vector3.right *0.05f;
+                    });
+                }
+            }
+        }).Start();
+
+    }
+
+    //Task
+
+    async void MoveWithTask()
+    {
+        await Task.Run(() =>
+        {
+            for (int i = 0; i <= 100; i++)
+            {
+                Thread.Sleep(50);
+
+                lock (mainThreadActions)
+                {
+                    mainThreadActions.Enqueue(() =>
+                    {
+                        taskSphere.position += Vector3.right * 0.05f;
+                    });
+                }
+            }
+        });
+
+    }
+
     //Corrutina
 
     IEnumerator MoveWithCoroutine()
     {
         for(int i = 0; i <= 100; i ++)
         {
-            coroutineSphere.position += Vector3.right * 0.05f;
+            CoroutineSphere.position += Vector3.right * 0.05f;
             yield return new WaitForSeconds(0.05f);
         }
     }

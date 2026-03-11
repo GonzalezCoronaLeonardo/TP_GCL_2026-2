@@ -256,15 +256,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e304448fdcba2624a9c29918acb5d885, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useSincrono: 0
-  useThread: 0
-  usetask: 0
-  useCorutine: 0
-  SincronoSphere: {fileID: 0}
-  ThreadSphere: {fileID: 0}
-  taskSphere: {fileID: 0}
-  CorutineSphere: {fileID: 0}
-  mainCube: {fileID: 0}
+  useSincrono: 1
+  useThread: 1
+  usetask: 1
+  useCorutine: 1
+  SincronoSphere: {fileID: 1421160984}
+  ThreadSphere: {fileID: 569945674}
+  taskSphere: {fileID: 786768186}
+  CoroutineSphere: {fileID: 1407590620}
+  mainCube: {fileID: 909584574}
 --- !u!4 &670713935
 Transform:
   m_ObjectHideFlags: 0

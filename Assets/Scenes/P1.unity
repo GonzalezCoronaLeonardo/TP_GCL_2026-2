@@ -185,6 +185,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7003766160345282116, guid: 04047230dccb62c4a9ace9b100289b64, type: 3}
   m_PrefabInstance: {fileID: 184718439}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &234437597 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 795821329334779515, guid: 04047230dccb62c4a9ace9b100289b64, type: 3}
+  m_PrefabInstance: {fileID: 184718439}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &417134519
 GameObject:
   m_ObjectHideFlags: 0
@@ -1288,7 +1293,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5749897140314435938, guid: dbaff94d077d3c847b0a5840c0da435b, type: 3}
       propertyPath: m_Name
-      value: Example5_Grey
+      value: Nave
       objectReference: {fileID: 0}
     - target: {fileID: 5749897140314435939, guid: dbaff94d077d3c847b0a5840c0da435b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1346,6 +1351,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5749897140314435938, guid: dbaff94d077d3c847b0a5840c0da435b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2129903323}
+    - targetCorrespondingSourceObject: {fileID: 5749897140314435938, guid: dbaff94d077d3c847b0a5840c0da435b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2129903326}
+    - targetCorrespondingSourceObject: {fileID: 5749897140314435938, guid: dbaff94d077d3c847b0a5840c0da435b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2129903327}
   m_SourcePrefab: {fileID: 100100000, guid: dbaff94d077d3c847b0a5840c0da435b, type: 3}
 --- !u!1 &2129903321 stripped
 GameObject:
@@ -1430,11 +1441,45 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2129903326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2129903321}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ae81dd11ba6e3e4aa6002ddf16dfba2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 50
+  rotationSpeed: 100
+  cameraTransform: {fileID: 234437597}
+  movementInput: {x: 0, y: 0}
+  turbulenceiterations: 1000000
+--- !u!114 &2129903327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2129903321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07dc02f3003fcb5459b5e979a9d6afb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 50
+  rotationSpeed: 100
+  cameraTransform: {fileID: 234437597}
+  movementInput: {x: 0, y: 0}
+  turbulenceiterations: 1000000
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

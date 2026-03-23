@@ -6,7 +6,7 @@ using System.Threading;
 using Unity.VisualScripting;
 using System.IO;
 
-public class FlightThreadNoSync : MonoBehaviour
+public class FlightThreadSync : MonoBehaviour
 {
     public float speed = 50f;
     public float rotationSpeed = 100f;
@@ -27,6 +27,8 @@ public class FlightThreadNoSync : MonoBehaviour
 
     //Bandera de control sobre lectura
     public bool read = false;
+    public bool write = false;
+    private object fileLock = new object(); //Objeto para sincronización de acceso al archivo
     //Ruta de almacenamiento del archivo
     string filePath;
 
@@ -78,9 +80,13 @@ public class FlightThreadNoSync : MonoBehaviour
         float yaw = movementInput.x * rotationSpeed * Time.deltaTime;
         this.transform.Rotate(0, yaw, 0);
 
-        //Actividad 3: método para leer el archivo de turbulencia
+        //Actividad 3: Sincronizar hilos
+        if (write && !read)
+        {
+            TryReadFile();
+            read = true;   
+        }
 
-        TryReadFile();
     }
 
     public void SimulateTurbulence(float time)
@@ -108,31 +114,40 @@ public class FlightThreadNoSync : MonoBehaviour
         //Señal en consola de inicio del hilo
         Debug.Log("Hilo de turbulencia iniciado en: ");
 
-        //Simulacion completa
-        isTurbulenceRunning = false;
+        Debug.Log("Escribiendo archivo...");
 
-        //Actividad 3: Escritura del archivo
-        using (StreamWriter writer = new StreamWriter(filePath,false))
+        lock (fileLock)
         {
-            foreach(var force in turbulenceForces)
+            using (StreamWriter writer = new StreamWriter(filePath, false))
             {
-                writer.WriteLine(force.ToString());
+                foreach (var force in turbulenceForces)
+                {
+                    writer.WriteLine(force.ToString());
+                }
+                writer.Flush();
             }
-            writer.Flush();
         }
 
-        Debug.Log("Archivo escrito");
-
-        //simulacion completa
-        isTurbulenceRunning = false;
     }
 
     void TryReadFile()
     {
         try
         {
-            string content = File.ReadAllText(filePath);
-            Debug.Log("Contenido del archivo de turbulencia: " + content);
+            lock (fileLock)
+            {
+                if (File.Exists(filePath))
+                {
+                    string content = File.ReadAllText(filePath);
+                    Debug.Log("Contenido del archivo de turbulencia: " + content);
+                }
+                else
+                {
+                    Debug.LogError("El archivo de turbulencia no existe aún.");
+                }
+            }
+            string content2 = File.ReadAllText(filePath);
+            Debug.Log("Contenido del archivo de turbulencia: " + content2);
         }
         catch (IOException ex)
         {

@@ -57,6 +57,30 @@ public class AIManager : MonoBehaviour
                 break;
             }
         }
+
+        //Si el jugador es atrapado, se mueve a la entrada
+        if(playerCaught)        {
+            MovePlayerToEntrance();
+            RelocateAllNPC();
+
+            return;
+        }
+        
+        //Jugador en la salida
+        if((playerPos - exit.position).sqrMagnitude < exitRangeSqr)
+        {
+            gameWon = true;
+            Debug.Log("Player has reached the exit. Game won!");
+        }
+
+        //Perseguir al jugador
+        foreach(var agent in agents)
+        {
+            if(agent.enabled && !agent.isStopped)
+            {
+                agent.SetDestination(playerPos);
+            }
+        }
     }
 
     //Metodo para llevar a player a la entrada
@@ -95,8 +119,7 @@ public class AIManager : MonoBehaviour
 
     Vector3 GetValidRandomPosition()
     {
-        if(triangulation.vertices.Length == 0)
-        {
+
             Vector3 pos;
             do
             {
@@ -116,8 +139,8 @@ public class AIManager : MonoBehaviour
                     
             }
             while((pos - entrancePos).sqrMagnitude < entranceRangeSqr);
-            return pos;
-        } 
+
+        return pos;
     }
 
     //Metodo para agregar enemigos a la lista
